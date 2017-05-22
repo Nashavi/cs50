@@ -162,7 +162,7 @@ void init(void)
     {
         for (int j=0; j<d ; j++)
         {
-            if ( (i==d-1) && (j==d-1))
+            if ((i==d-1) && (j==d-1))
             {
                 board[i][j] = 0; 
             }
@@ -267,22 +267,25 @@ bool move(int tile)
  */
 bool won(void)
 {
-    int true_tile = 1;
-    
-    for (int i = 0; i<d ; i++)
+    if (board[d-1][d-1] == 0)
     {
-        for (int j=0; j<d ; j++)
+        int checker = 1;
+        
+        for (int i = 0; i<d ; i++)
         {
-            if (board[i][j]  != true_tile && i !=d-1 && j != d-1)
+            for (int j=0; j<d ; j++)
             {
-                return false;
+                if (board[i][j] != checker)
+                    {
+                        return false;
+                    }
+                    
+                if (checker == (d*d)-1)
+                    return true;
+                    
+                checker ++;
             }
-            else if (board[d-1][d-1] != 0)
-            {
-                return false;
-            }
-        true_tile++;
         }
     }
-    return true;
+    return false;
 }
